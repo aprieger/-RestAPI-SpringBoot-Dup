@@ -1,13 +1,9 @@
 package com.aftt.dto;
 
-import java.util.ArrayList;
-
-import org.json.simple.JSONArray;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "jobs2")
-public class Job2 {
+public class JobLocal {
 
     @Id
     public String id;
@@ -17,12 +13,10 @@ public class Job2 {
     public String ref;
     public int state;
     public int scheduled;
-    //public String[] dependencies;
-    //public ArrayList<String> dependencies;
-    public JSONArray dependencies;
+    public String[] dependencies;
 
-	public Job2() {}
-	public Job2(String id, String category, String type, String ref, int state, int scheduled, JSONArray dependencies) {
+	public JobLocal() {}
+	public JobLocal(String id, String category, String type, String ref, int state, int scheduled, String[] dependencies) {
 		super();
 		this.id = id;
 		this.category = category;
@@ -68,10 +62,10 @@ public class Job2 {
 	public void setScheduled(int scheduled) {
 		this.scheduled = scheduled;
 	}
-	public JSONArray getDependencies() {
+	public String[] getDependencies() {
 		return dependencies;
 	}
-	public void setDependencies(JSONArray dependencies) {
+	public void setDependencies(String[] dependencies) {
 		this.dependencies = dependencies;
 	}
 	@Override
@@ -80,5 +74,4 @@ public class Job2 {
                 "Job[id=%s, category='%s', type='%s', ref='%s', state='%d', scheduled='%d', dependencies='%s']",
                 id, category, type, ref, state, scheduled, dependencies);
     }
-	
 }

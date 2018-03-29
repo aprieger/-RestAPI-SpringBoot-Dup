@@ -8,5 +8,6 @@ import com.aftt.dto.Job;
 public interface JobRepository extends MongoRepository<Job, String> {
 
 	public List<Job> findAll();
-
+	public Job findByRef(String ref);
+	public Job findById(String id);
 }

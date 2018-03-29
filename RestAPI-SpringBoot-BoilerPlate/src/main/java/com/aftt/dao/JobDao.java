@@ -1,90 +1,77 @@
 package com.aftt.dao;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import org.json.simple.JSONArray;
+
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.json.simple.JSONArray;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aftt.dto.Job;
+import com.aftt.main.JobRepository;
 
 @Component
 public class JobDao  {
-	
-	List<Job> jobList = new ArrayList<Job>();
-	List<Job> jobRepo = new ArrayList<Job>();
-	
-	public List<Job> getJobs(){
-		final long startTime = System.currentTimeMillis();
 
-		jobList = new ArrayList<Job>();
-		
-		JSONParser parser = new JSONParser();
-		JSONArray jobArray = new JSONArray();
-		String filePath = "";
-		try {
-			filePath = new File( "src/main/java/com/pel2/dao/JobList.json" ).getCanonicalPath();
-		} catch (IOException e1) {e1.printStackTrace();}
-		
-		try {
-			jobArray = (JSONArray) parser.parse(new FileReader(filePath));
-		} catch (Exception e) {System.out.println(e.getMessage());}
-		
-		if (jobArray != null) {
-			for (Object obj : jobArray) {
-				JSONObject jObj = (JSONObject) obj;
-				Job job = new Job();
-				job.id = null;
-				job.category = (String) jObj.get("category");
-				job.type = (String) jObj.get("type");
-				job.ref = (String) jObj.get("ref");
-				job.state = Integer.parseInt(jObj.get("state").toString());
-				job.scheduled = Integer.parseInt(jObj.get("scheduled").toString());
-				
-				JSONArray depJSONArray = (JSONArray) jObj.get("dependencies");
-				ArrayList<String> depAL = new ArrayList<String>();
-				for (Object depObj : depJSONArray)
-			    {
-					JSONObject jDepObj = (JSONObject) depObj;
-			      	depAL.add((String) jDepObj.get("ref"));
-			    }
-				job.dependencies = depAL.toArray(new String[depAL.size()]);
+	@Autowired
+	private JobRepository repository;
+	
+	private List<Job> jobRepo;
+	private List<Job> jobOrderedList;
+	
+	//Get all the jobs in the repository
+	public List<Job> getJobs(){	
+		return repository.findAll();
+	}
+        
+	public List<Job> getOrderedJobs(){        
+        jobRepo = new ArrayList<>();
+        jobOrderedList = new ArrayList<>();
+        
+        repository.findAll().forEach((job) -> {
+            addJobToOrderedList(job);
+        });
 
-				jobRepo.add(job);
-			}
-		}
-		for (Job job : jobRepo) {
-			addJob(job);
-		}
-		final long endTime = System.currentTimeMillis();
-		System.out.println("Total execution time: " + (endTime - startTime) );
-		
-		return jobList;
+        return jobOrderedList;
 	}
 	
-	private void addJob(Job job) {
-		boolean exists = false;
-		for (Job listJob : jobList) {
-			if (listJob.equals(job))
-				exists = true;
-		}
-		if (!exists) {
-			if (job.getDependencies().length==0) {
-				jobList.add(job);
-			}
-			else {
-				for (int i=0; i < job.getDependencies().length; i++) {
-					for (Job repoJob : jobRepo) {
-						if (repoJob.ref.equals(job.getDependencies()[i]))
-							addJob(repoJob);
-					}
-				}
-				jobList.add(job);
-			}
-		}
+	private void addJobToOrderedList(Job job) {
+        boolean jobListed = false;
+        if (job != null) {
+            if (jobOrderedList != null) {
+                for (Job testJob : jobOrderedList) {
+                    if (job.id.equals(testJob.id)) {
+                        jobListed = true;
+                    }
+                }
+            }
+            if (!jobListed) {
+                if (job.getDependencies().isEmpty()) {
+                    jobOrderedList.add(job);
+                }
+                else {
+                    for (int i=0; i < job.getDependencies().size(); i++) {
+                        JSONArray depArry = job.getDependencies();
+                        HashMap<String, String> dep = (HashMap<String, String>) depArry.get(i);
+                        Job job2Add = repository.findByRef(dep.get("ref"));
+                        addJobToOrderedList(job2Add);
+                    }
+                    jobOrderedList.add(job);
+                }
+            }
+        }
+	}
+	
+	//Post the new list of jobs to the repo
+	public void addJobs(List<Job> jobList) {
+		repository.insert(jobList);
+	}
+	
+	//Delete all the data from the jobs repo
+	public void deleteAllJobs() {
+		repository.deleteAll();
 	}
 }
