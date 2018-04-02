@@ -1,0 +1,28 @@
+db.runCommand( { insert: "sors", documents:
+[
+  {
+    "sorName":"Triumph",
+    "platforms": [
+      {
+        "platformName": "ARDW",
+        "jobs": [
+          {
+            "jobName":"TH0CSITX",
+            "predecessors": [
+              {
+                "jobName":"PredName1"
+              }
+            ],
+            "outputFiles": [
+              {
+                "outputFileName":"TH0CT.PHTHSITX.D06.NPSITXF.J171201",
+                "outputFileType":"Flat File"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
+})

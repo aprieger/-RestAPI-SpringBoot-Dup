@@ -32,7 +32,7 @@ public class JobController {
 	public List<Job> getJobsOrdered(){
 		return jobDao.getOrderedJobs();
 	}
-	
+    
 	@PostMapping(value = "/add")
     public List<Job> addJobs(@RequestBody List<Job> jobList) throws SQLException {
 		jobDao.addJobs(jobList);
@@ -43,6 +43,5 @@ public class JobController {
     public List<Job> deleteAllJobs() throws SQLException {
 		jobDao.deleteAllJobs();
 		return this.getJobs();
-    }
-	
+    }	
 }

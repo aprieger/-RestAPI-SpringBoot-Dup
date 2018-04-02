@@ -13,38 +13,36 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.aftt.dao.JobDao;
-import com.aftt.dto.Job;
+import com.aftt.dao.SorDao;
+import com.aftt.dto.Sor;
 
 @RestController
-@RequestMapping( value = "/sor")
+@RequestMapping( value = "/sors")
 public class SorController {	
 	
-//	@Autowired
-//	private JobDao jobDao2;
-//
-//	@RequestMapping(value = "/all", method = RequestMethod.GET)
-//	public List<Job> getJobs(){
-//		return jobDao2.getJobs();
-//	}
-//	
-////	@RequestMapping(value = "/details" , method = RequestMethod.POST)
-////	public Employee getEmployee(@RequestBody String id){
-////		Employee responseObj = testService.getEmployee(id);
-////		System.out.println("TestController.getEmployee()"+responseObj.toString());
-////		return responseObj;
-////	}
-//	
-//	@PostMapping(value = "/add")
-//    public List<Job> addJobs(@RequestBody List<Job> jobList) throws SQLException {
-//		jobDao2.addJobs(jobList);
-//		return this.getJobs();
-//    }
-//	
-//	@PostMapping(value = "/delete/all")
-//    public List<Job> deleteAllJobs() throws SQLException {
-//		jobDao2.deleteAllJobs();
-//		return this.getJobs();
-//    }
+	@Autowired
+	private SorDao sorDao;
+
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Sor> getSors(){
+		return sorDao.getSors();
+	}
 	
+	@PostMapping(value = "/add/all")
+    public List<Sor> addAllSors(@RequestBody List<Sor> sorList) throws SQLException {
+		sorDao.addAllSors(sorList);
+		return this.getSors();
+    }
+	
+	@PostMapping(value = "/add/sor")
+	public List<Sor> addSor(@RequestBody Sor sor) throws SQLException {
+		sorDao.addSor(sor);
+		return this.getSors();
+	}
+	
+	@PostMapping(value = "/delete/all")
+    public List<Sor> deleteAllSors() throws SQLException {
+		sorDao.deleteAllSors();
+		return this.getSors();
+    }
 }

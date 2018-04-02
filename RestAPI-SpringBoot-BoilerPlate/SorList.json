@@ -1,0 +1,26 @@
+[
+  {
+    "sorName":"Triumph",
+    "platforms": [
+      {
+        "platformName": "ARDW",
+        "jobs": [
+          {
+            "jobName":"TH0CSITX",
+            "predecessors": [
+              {
+                "predName":"PredName1"
+              }
+            ],
+            "outputFiles": [
+              {
+                "outputFileName":"TH0CT.PHTHSITX.D06.NPSITXF.J171201",
+                "outputFileType":"Flat File"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
