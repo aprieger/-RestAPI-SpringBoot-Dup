@@ -1,6 +1,7 @@
 package com.aftt.dto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.springframework.data.annotation.Id;
@@ -9,76 +10,96 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "jobs")
 public class Job {
 
-    @Id
-    public String id;
-
-    public String category;
-    public String type;
-    public String ref;
-    public int state;
-    public int scheduled;
-    //public String[] dependencies;
-    //public ArrayList<String> dependencies;
-    public JSONArray dependencies;
-
-	public Job() {}
-	public Job(String id, String category, String type, String ref, int state, int scheduled, JSONArray dependencies) {
-		super();
-		this.id = id;
-		this.category = category;
-		this.type = type;
-		this.ref = ref;
-		this.state = state;
-		this.scheduled = scheduled;
-		this.dependencies = dependencies;
+    public String jobName;
+    public String jobNumber;
+    public String runDate;
+    public String runTime;
+    public String schedule;
+    public String status;
+    public String sorName;
+    public String platformName;
+    public List<Job> predecessors;
+    public List<MetaOutputFile> outputFiles;
+    
+	public Job() {
 	}
-	public String getId() {
-		return id;
+	public Job(String jobName, String jobNumber, String runDate, String runTime, String schedule, String status,
+			String sorName, String platformName, List<Job> predecessors, List<MetaOutputFile> outputFiles) {
+		this.jobName = jobName;
+		this.jobNumber = jobNumber;
+		this.runDate = runDate;
+		this.runTime = runTime;
+		this.schedule = schedule;
+		this.status = status;
+		this.sorName = sorName;
+		this.platformName = platformName;
+		this.predecessors = predecessors;
+		this.outputFiles = outputFiles;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public String getJobName() {
+		return jobName;
 	}
-	public String getCategory() {
-		return category;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
-	public void setCategory(String category) {
-		this.category = category;
+	public String getJobNumber() {
+		return jobNumber;
 	}
-	public String getType() {
-		return type;
+	public void setJobNumber(String jobNumber) {
+		this.jobNumber = jobNumber;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public String getRunDate() {
+		return runDate;
 	}
-	public String getRef() {
-		return ref;
+	public void setRunDate(String runDate) {
+		this.runDate = runDate;
 	}
-	public void setRef(String ref) {
-		this.ref = ref;
+	public String getRunTime() {
+		return runTime;
 	}
-	public int getState() {
-		return state;
+	public void setRunTime(String runTime) {
+		this.runTime = runTime;
 	}
-	public void setState(int state) {
-		this.state = state;
+	public String getSchedule() {
+		return schedule;
 	}
-	public int getScheduled() {
-		return scheduled;
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
 	}
-	public void setScheduled(int scheduled) {
-		this.scheduled = scheduled;
+	public String getStatus() {
+		return status;
 	}
-	public JSONArray getDependencies() {
-		return dependencies;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	public void setDependencies(JSONArray dependencies) {
-		this.dependencies = dependencies;
+	public String getSorName() {
+		return sorName;
+	}
+	public void setSorName(String sorName) {
+		this.sorName = sorName;
+	}
+	public String getPlatformName() {
+		return platformName;
+	}
+	public void setPlatformName(String platformName) {
+		this.platformName = platformName;
+	}
+	public List<Job> getPredecessors() {
+		return predecessors;
+	}
+	public void setPredecessors(List<Job> predecessors) {
+		this.predecessors = predecessors;
+	}
+	public List<MetaOutputFile> getOutputFiles() {
+		return outputFiles;
+	}
+	public void setOutputFiles(List<MetaOutputFile> outputFiles) {
+		this.outputFiles = outputFiles;
 	}
 	@Override
-    public String toString() {
-        return String.format(
-                "Job[id=%s, category='%s', type='%s', ref='%s', state='%d', scheduled='%d', dependencies='%s']",
-                id, category, type, ref, state, scheduled, dependencies);
-    }
-	
+	public String toString() {
+		return "Job [jobName=" + jobName + ", jobNumber=" + jobNumber + ", runDate=" + runDate + ", runTime=" + runTime
+				+ ", schedule=" + schedule + ", status=" + status + ", sorName=" + sorName + ", platformName="
+				+ platformName + ", predecessors=" + predecessors + ", outputFiles=" + outputFiles + "]";
+	}
 }

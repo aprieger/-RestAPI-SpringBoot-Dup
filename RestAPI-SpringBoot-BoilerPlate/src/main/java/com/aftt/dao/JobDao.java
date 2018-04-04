@@ -11,67 +11,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.aftt.dto.Job;
-import com.aftt.main.JobRepository;
+import com.aftt.dto.Sor;
+import com.aftt.dto.JobStatus;
+import com.aftt.dao.JobStatusDao;
+import com.aftt.dao.SorDao;
 
 @Component
 public class JobDao  {
-
-	@Autowired
-	private JobRepository repository;
 	
 	private List<Job> jobRepo;
 	private List<Job> jobOrderedList;
+	private JobStatusDao jobStatusDao = new JobStatusDao();
+	private SorDao sorDao = new SorDao();
+	
+	private List<Sor> sorRepo;
+	private List<JobStatus> jobStatusRepo;
 	
 	//Get all the jobs in the repository
 	public List<Job> getJobs(){	
-		return repository.findAll();
+		sorRepo = new ArrayList<>();
+		jobStatusRepo = new ArrayList<>();
+		
+		return null;
 	}
         
 	public List<Job> getOrderedJobs(){        
         jobRepo = new ArrayList<>();
         jobOrderedList = new ArrayList<>();
-        
-        repository.findAll().forEach((job) -> {
-            addJobToOrderedList(job);
-        });
 
         return jobOrderedList;
 	}
 	
 	private void addJobToOrderedList(Job job) {
-        boolean jobListed = false;
-        if (job != null) {
+		boolean jobListed = false;
+		if (job != null) {
             if (jobOrderedList != null) {
                 for (Job testJob : jobOrderedList) {
-                    if (job.id.equals(testJob.id)) {
+                    if (job.jobName.equals(testJob.jobName)) {
                         jobListed = true;
                     }
                 }
             }
             if (!jobListed) {
-                if (job.getDependencies().isEmpty()) {
-                    jobOrderedList.add(job);
-                }
-                else {
-                    for (int i=0; i < job.getDependencies().size(); i++) {
-                        JSONArray depArry = job.getDependencies();
-                        HashMap<String, String> dep = (HashMap<String, String>) depArry.get(i);
-                        Job job2Add = repository.findByRef(dep.get("ref"));
-                        addJobToOrderedList(job2Add);
+            		if (job.getPredecessors().isEmpty()) {
+            			jobOrderedList.add(job);
+            		}
+            		else {
+            			for (int i=0; i < job.getPredecessors().size(); i++) {
+            				List<Job> predecessors= job.getPredecessors();
+            				Job job2Add = null;
+            				for (int j=0; j < jobRepo.size(); j++)
+            					if (jobRepo.get(i).jobName.equals(predecessors.get(i).jobName))
+            						job2Add = jobRepo.get(i);
+            				if (job2Add != null)
+            					addJobToOrderedList(job2Add);
                     }
                     jobOrderedList.add(job);
                 }
             }
         }
-	}
-	
-	//Post the new list of jobs to the repo
-	public void addJobs(List<Job> jobList) {
-		repository.insert(jobList);
-	}
-	
-	//Delete all the data from the jobs repo
-	public void deleteAllJobs() {
-		repository.deleteAll();
 	}
 }

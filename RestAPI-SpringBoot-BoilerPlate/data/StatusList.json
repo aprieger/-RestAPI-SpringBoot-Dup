@@ -3,6 +3,8 @@
     "jobName":"JobName1",
     "jobNumber":"JobNumber1",
     "runDate":"22 MAR 2018",
-    "runTime":"00.53.19"
+    "runTime":"00.53.19",
+    "schedule":"Schedule1",
+    "status":"0005D"
   }
 ]

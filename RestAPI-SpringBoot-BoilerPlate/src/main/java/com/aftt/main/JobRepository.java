@@ -3,11 +3,11 @@ package com.aftt.main;
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.aftt.dto.Job;
+import com.aftt.dto.JobDb;
 
-public interface JobRepository extends MongoRepository<Job, String> {
+public interface JobRepository extends MongoRepository<JobDb, String> {
 
-	public List<Job> findAll();
-	public Job findByRef(String ref);
-	public Job findById(String id);
+	public List<JobDb> findAll();
+	public JobDb findByRef(String ref);
+	public JobDb findById(String id);
 }

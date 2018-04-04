@@ -13,35 +13,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.aftt.dao.JobDbDao;
-import com.aftt.dto.JobDb;
+import com.aftt.dao.JobStatusDao;
+import com.aftt.dto.JobStatus;
 
 @RestController
-@RequestMapping( value = "/jobs")
-public class JobController {	
+@RequestMapping( value = "/jobstatus")
+public class JobStatusController {	
 	
 	@Autowired
-	private JobDbDao jobDbDao;
+	private JobStatusDao jobStatusDao;
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public List<JobDb> getJobs(){
-		return jobDbDao.getJobs();
-	}
-        
-    @RequestMapping(value = "/all/ordered", method = RequestMethod.GET)
-	public List<JobDb> getJobsOrdered(){
-		return jobDbDao.getOrderedJobs();
+	public List<JobStatus> getJobStatus(){
+		return jobStatusDao.getJobStatus();
 	}
     
 	@PostMapping(value = "/add")
-    public List<JobDb> addJobs(@RequestBody List<JobDb> jobList) throws SQLException {
-		jobDbDao.addJobs(jobList);
-		return this.getJobs();
+    public List<JobStatus> addJobs(@RequestBody List<JobStatus> jobStatusList) throws SQLException {
+		jobStatusDao.addJobStatus(jobStatusList);
+		return this.getJobStatus();
     }
 	
 	@PostMapping(value = "/delete/all")
-    public List<JobDb> deleteAllJobs() throws SQLException {
-		jobDbDao.deleteAllJobs();
-		return this.getJobs();
+    public List<JobStatus> deleteAllJobs() throws SQLException {
+		jobStatusDao.deleteAllJobStatus();
+		return this.getJobStatus();
     }	
 }
