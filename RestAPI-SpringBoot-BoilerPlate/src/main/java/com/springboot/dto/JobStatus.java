@@ -1,12 +1,18 @@
 package com.aftt.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.json.simple.JSONArray;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+
 @Document(collection = "jobstatus")
+@JsonInclude(Include.NON_NULL)
 public class JobStatus {
 
     @Id
@@ -14,20 +20,17 @@ public class JobStatus {
 
     public String jobName;
     public String jobNumber;
-    public String runDate;
-    public String runTime;
+    public Long runDatetime;
     public String schedule;
     public String status;
     
 	public JobStatus() {
 	}
-	public JobStatus(String id, String jobName, String jobNumber, String runDate, String runTime, String schedule,
-			String status) {
+	public JobStatus(String id, String jobName, String jobNumber, Long runDatetime, String schedule, String status) {
 		this.id = id;
 		this.jobName = jobName;
 		this.jobNumber = jobNumber;
-		this.runDate = runDate;
-		this.runTime = runTime;
+		this.runDatetime = runDatetime;
 		this.schedule = schedule;
 		this.status = status;
 	}
@@ -49,17 +52,12 @@ public class JobStatus {
 	public void setJobNumber(String jobNumber) {
 		this.jobNumber = jobNumber;
 	}
-	public String getRunDate() {
-		return runDate;
+
+	public Long getRunDatetime() {
+		return runDatetime;
 	}
-	public void setRunDate(String runDate) {
-		this.runDate = runDate;
-	}
-	public String getRunTime() {
-		return runTime;
-	}
-	public void setRunTime(String runTime) {
-		this.runTime = runTime;
+	public void setRunDatetime(Long runDatetime) {
+		this.runDatetime = runDatetime;
 	}
 	public String getSchedule() {
 		return schedule;
@@ -75,7 +73,8 @@ public class JobStatus {
 	}
 	@Override
 	public String toString() {
-		return "id=" + id + ", jobName=" + jobName + ", jobNumber=" + jobNumber + ", runDate=" + runDate
-				+ ", runTime=" + runTime + ", schedule=" + schedule + ", status=" + status;
+		return "JobStatus [id=" + id + ", jobName=" + jobName + ", jobNumber=" + jobNumber + ", runDatetime="
+				+ runDatetime + ", schedule=" + schedule + ", status=" + status + "]";
 	}
+
 }
