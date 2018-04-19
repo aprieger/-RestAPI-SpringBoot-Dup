@@ -1,4 +1,4 @@
-package com.aftt.controller;
+package com.springboot.controller;
 
 import java.net.URI;
 import java.sql.SQLException;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.aftt.dao.JobDbDao;
-import com.aftt.dto.JobDb;
+import com.springboot.dao.JobDbDao;
+import com.springboot.dto.JobDb;
 
 @RestController
 @RequestMapping( value = "/jobs")

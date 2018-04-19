@@ -1,4 +1,4 @@
-package com.aftt.controller;
+package com.springboot.controller;
 
 import java.net.URI;
 import java.sql.SQLException;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.aftt.dao.EmployeeDao;
-import com.aftt.dao.JSTAPIDao;
-import com.aftt.dto.Employee;
-import com.aftt.dto.InputData;
-import com.aftt.dto.JobStatus;
+import com.springboot.dao.EmployeeDao;
+import com.springboot.dao.JSTAPIDao;
+import com.springboot.dto.Employee;
+import com.springboot.dto.InputData;
+import com.springboot.dto.JobStatus;
 
 @RestController
 @RequestMapping( value = "/jstapi")

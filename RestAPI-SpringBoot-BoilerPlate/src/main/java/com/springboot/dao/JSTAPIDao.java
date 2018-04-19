@@ -1,4 +1,4 @@
-package com.aftt.dao;
+package com.springboot.dao;
 
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
-import com.aftt.dto.InputData;
-import com.aftt.dto.JobStatus;
-import com.aftt.main.JobStatusRepository;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.springboot.dto.InputData;
+import com.springboot.dto.JobStatus;
+import com.springboot.main.JobStatusRepository;
 
 import static com.mongodb.client.model.Filters.*;
 

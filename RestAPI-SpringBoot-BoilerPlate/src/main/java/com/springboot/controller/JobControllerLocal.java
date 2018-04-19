@@ -1,4 +1,4 @@
-package com.aftt.controller;
+package com.springboot.controller;
 
 import java.net.URI;
 import java.sql.SQLException;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.aftt.dao.JobDaoLocal;
-import com.aftt.dto.JobLocal;
+import com.springboot.dao.JobDaoLocal;
+import com.springboot.dto.JobLocal;
 
 @RestController
 @RequestMapping( value = "/joblocal")

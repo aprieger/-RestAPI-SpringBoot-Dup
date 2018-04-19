@@ -1,9 +1,9 @@
-package com.aftt.main;
+package com.springboot.main;
 
 import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.aftt.dto.JobDb;
+import com.springboot.dto.JobDb;
 
 public interface JobRepository extends MongoRepository<JobDb, String> {
 

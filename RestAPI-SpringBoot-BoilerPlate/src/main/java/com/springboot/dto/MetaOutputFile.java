@@ -1,4 +1,4 @@
-package com.aftt.dto;
+package com.springboot.dto;
 
 public class MetaOutputFile {
 

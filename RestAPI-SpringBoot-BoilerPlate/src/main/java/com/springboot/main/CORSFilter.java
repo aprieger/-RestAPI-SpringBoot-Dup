@@ -1,4 +1,4 @@
-package com.aftt.main;
+package com.springboot.main;
 
 import java.io.IOException;
 
@@ -26,25 +26,16 @@ public class CORSFilter implements Filter {
 	final static public String PUBLIC_GUID_COOKIE_NAME = "blueboxpublic";
 	final static public String WEB_URL_ORIGIN_HEADER = "Origin";
 	
-//	private static Logger LOG = LoggerFactory.getLogger(CORSFilter.class);
 
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain filterChain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		HttpServletRequest req = (HttpServletRequest) arg0;
 		HttpServletResponse response = (HttpServletResponse) arg1;
-//		String origin = req.getHeader(WEB_URL_ORIGIN_HEADER);
-//		String referrer = req.getHeader(REFERRER_HEADER);
-		
-//		LOG.info("REFERRER_HEADER / referrer - "+referrer);
-//		LOG.info("WEB_URL_ORIGIN_HEADER / origin - "+origin);
-		
 		
 		 response.addHeader("Access-Control-Allow-Origin", "*");//Any external website can access resources in GMIP.
       
@@ -60,7 +51,5 @@ public class CORSFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-
 	}
 }

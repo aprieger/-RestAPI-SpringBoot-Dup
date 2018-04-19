@@ -1,4 +1,4 @@
-package com.aftt.dao;
+package com.springboot.dao;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,8 +10,8 @@ import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.aftt.dto.JobStatus;
-import com.aftt.main.JobStatusRepository;
+import com.springboot.dto.JobStatus;
+import com.springboot.main.JobStatusRepository;
 
 @Component
 public class JobStatusDao  {

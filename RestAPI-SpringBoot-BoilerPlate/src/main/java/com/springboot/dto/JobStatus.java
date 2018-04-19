@@ -1,4 +1,4 @@
-package com.aftt.dto;
+package com.springboot.dto;
 
 import java.util.ArrayList;
 import java.util.Date;

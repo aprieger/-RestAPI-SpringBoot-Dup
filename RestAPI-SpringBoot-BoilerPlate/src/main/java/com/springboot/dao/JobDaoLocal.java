@@ -1,4 +1,4 @@
-package com.aftt.dao;
+package com.springboot.dao;
 
 import java.io.File;
 import java.io.FileReader;
@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Component;
 
-import com.aftt.dto.JobLocal;
+import com.springboot.dto.JobLocal;
 
 @Component
 public class JobDaoLocal  {

@@ -1,4 +1,4 @@
-package com.aftt.dao;
+package com.springboot.dao;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,9 +10,9 @@ import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.aftt.dto.MetaPlatform;
-import com.aftt.dto.Sor;
-import com.aftt.main.SorRepository;
+import com.springboot.dto.MetaPlatform;
+import com.springboot.dto.Sor;
+import com.springboot.main.SorRepository;
 
 @Component
 public class SorDao  {

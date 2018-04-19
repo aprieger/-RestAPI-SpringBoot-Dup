@@ -1,4 +1,4 @@
-package com.aftt.controller;
+package com.springboot.controller;
 
 import java.net.URI;
 import java.sql.SQLException;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.aftt.dao.SorDao;
-import com.aftt.dto.Sor;
+import com.springboot.dao.SorDao;
+import com.springboot.dto.Sor;
 
 @RestController
 @RequestMapping( value = "/sors")
